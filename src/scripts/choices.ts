@@ -159,10 +159,10 @@ class Choices implements Choices {
     }
 
     this.config = merge.all<Options>(
-      [DEFAULT_CONFIG, Choices.defaults.options, userConfig],
+      [ DEFAULT_CONFIG, Choices.defaults.options, userConfig ],
       // When merging array configs, replace with a copy of the userConfig array,
       // instead of concatenating with the default array
-      { arrayMerge: (_, sourceArray) => [...sourceArray] },
+      { arrayMerge: (_, sourceArray) => [ ...sourceArray ] },
     );
 
     const invalidConfigOptions = diff(this.config, DEFAULT_CONFIG);
@@ -196,7 +196,7 @@ class Choices implements Choices {
     this.config.searchEnabled =
       this._isSelectMultipleElement || this.config.searchEnabled;
 
-    if (!['auto', 'always'].includes(`${this.config.renderSelectedChoices}`)) {
+    if (![ 'auto', 'always' ].includes(`${this.config.renderSelectedChoices}`)) {
       this.config.renderSelectedChoices = 'auto';
     }
 
@@ -562,7 +562,7 @@ class Choices implements Choices {
     }
 
     // If only one value has been passed, convert to array
-    const choiceValue = Array.isArray(value) ? value : [value];
+    const choiceValue = Array.isArray(value) ? value : [ value ];
 
     // Loop through each value and
     choiceValue.forEach((val) => this._findAndSelectChoiceByValue(val));
@@ -973,7 +973,7 @@ class Choices implements Choices {
 
     // Prepend placeholeder
     const sortedChoices = this._isSelectOneElement
-      ? [...placeholderChoices, ...normalChoices]
+      ? [ ...placeholderChoices, ...normalChoices ]
       : normalChoices;
 
     if (this._isSearching) {
@@ -1331,7 +1331,7 @@ class Choices implements Choices {
     const haystack = this._store.searchableChoices;
     const needle = newValue;
     const options = Object.assign(this.config.fuseOptions, {
-      keys: [...this.config.searchFields],
+      keys: [ ...this.config.searchFields ],
       includeMatches: true,
     }) as Fuse.IFuseOptions<Choice>;
     const fuse = new Fuse(haystack, options);
@@ -1489,9 +1489,9 @@ class Choices implements Choices {
   }
 
   _onKeyUp({
-    target,
-    keyCode,
-  }: Pick<KeyboardEvent, 'target' | 'keyCode'>): void {
+             target,
+             keyCode,
+           }: Pick<KeyboardEvent, 'target' | 'keyCode'>): void {
     const { value } = this.input;
     const { activeItems } = this._store;
     const canAddItem = this._canAddItem(activeItems, value);
@@ -1936,14 +1936,14 @@ class Choices implements Choices {
   }
 
   _addItem({
-    value,
-    label = null,
-    choiceId = -1,
-    groupId = -1,
-    customProperties = {},
-    placeholder = false,
-    keyCode = -1,
-  }: {
+             value,
+             label = null,
+             choiceId = -1,
+             groupId = -1,
+             customProperties = {},
+             placeholder = false,
+             keyCode = -1,
+           }: {
     value: string;
     label?: string | null;
     choiceId?: number;
@@ -2018,15 +2018,15 @@ class Choices implements Choices {
   }
 
   _addChoice({
-    value,
-    label = null,
-    isSelected = false,
-    isDisabled = false,
-    groupId = -1,
-    customProperties = {},
-    placeholder = false,
-    keyCode = -1,
-  }: {
+               value,
+               label = null,
+               isSelected = false,
+               isDisabled = false,
+               groupId = -1,
+               customProperties = {},
+               placeholder = false,
+               keyCode = -1,
+             }: {
     value: string;
     label?: string | null;
     isSelected?: boolean;
@@ -2205,7 +2205,7 @@ class Choices implements Choices {
     if (!this._isSelectOneElement) {
       this.containerInner.element.appendChild(this.input.element);
     } else if (this.config.searchEnabled) {
-      if(this.config.moveSearchOuter) {
+      if (this.config.moveSearchOuter) {
         this.containerInner.element.appendChild(this.input.element);
       } else {
         this.dropdown.element.insertBefore(
