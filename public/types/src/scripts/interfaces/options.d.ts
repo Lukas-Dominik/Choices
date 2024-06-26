@@ -194,6 +194,16 @@ export interface Options {
      */
     searchEnabled: boolean;
     /**
+     * Whether a search area should be shown.
+     *
+     * @note Move search bar out of the list
+     *
+     * **Input types affected:** select-one
+     *
+     * @default true
+     */
+    moveSearchOuter: boolean;
+    /**
      * Whether choices should be filtered by input or not. If `false`, the search event will still emit, but choices will not be filtered.
      *
      * **Input types affected:** select-one

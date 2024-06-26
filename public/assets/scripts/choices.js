@@ -1,4 +1,4 @@
-/*! choices.js v10.2.0 | © 2022 Josh Johnson | https://github.com/jshjohnson/Choices#readme */
+/*! choices.js v10.2.0 | © 2024 Josh Johnson | https://github.com/jshjohnson/Choices#readme */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -1820,7 +1820,7 @@ var Choices = /** @class */function () {
   };
   Choices.prototype._createElements = function () {
     this.containerOuter = new components_1.Container({
-      element: this._getTemplate('containerOuter', this._direction, this._isSelectElement, this._isSelectOneElement, this.config.searchEnabled, this.passedElement.element.type, this.config.labelId),
+      element: this._getTemplate('containerOuter', this._direction, this._isSelectElement, this._isSelectOneElement, this.passedElement.element.type, this.config.labelId),
       classNames: this.config.classNames,
       type: this.passedElement.element.type,
       position: this.config.position
@@ -1871,7 +1871,11 @@ var Choices = /** @class */function () {
     if (!this._isSelectOneElement) {
       this.containerInner.element.appendChild(this.input.element);
     } else if (this.config.searchEnabled) {
-      this.dropdown.element.insertBefore(this.input.element, this.dropdown.element.firstChild);
+      if (this.config.moveSearchOuter) {
+        this.containerInner.element.appendChild(this.input.element);
+      } else {
+        this.dropdown.element.insertBefore(this.input.element, this.dropdown.element.firstChild);
+      }
     }
     if (this._isSelectElement) {
       this._highlightPosition = 0;
@@ -2888,6 +2892,7 @@ exports.DEFAULT_CONFIG = {
   searchFloor: 1,
   searchResultLimit: 4,
   searchFields: ['label', 'value'],
+  moveSearchOuter: false,
   position: 'auto',
   resetScrollPosition: true,
   shouldSort: true,

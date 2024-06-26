@@ -2142,7 +2142,6 @@ class Choices implements Choices {
         this._direction,
         this._isSelectElement,
         this._isSelectOneElement,
-        this.config.f,
         this.passedElement.element.type,
         this.config.labelId,
       ),
