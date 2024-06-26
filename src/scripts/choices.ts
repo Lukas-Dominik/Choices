@@ -2142,7 +2142,7 @@ class Choices implements Choices {
         this._direction,
         this._isSelectElement,
         this._isSelectOneElement,
-        this.config.searchEnabled,
+        this.config.f,
         this.passedElement.element.type,
         this.config.labelId,
       ),
@@ -2206,10 +2206,14 @@ class Choices implements Choices {
     if (!this._isSelectOneElement) {
       this.containerInner.element.appendChild(this.input.element);
     } else if (this.config.searchEnabled) {
-      this.dropdown.element.insertBefore(
-        this.input.element,
-        this.dropdown.element.firstChild,
-      );
+      if(this.config.moveSearchOuter) {
+        this.containerInner.element.appendChild(this.input.element);
+      } else {
+        this.dropdown.element.insertBefore(
+          this.input.element,
+          this.dropdown.element.firstChild,
+        );
+      }
     }
 
     if (this._isSelectElement) {
